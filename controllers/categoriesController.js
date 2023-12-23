@@ -3,7 +3,11 @@ const Categories=require("../models/categories")
 
 
 
+
+
+
 const getCategories=async(req,res)=>{
+
     try{
       const categories=await Categories.find({});
       res.status(200).json({statusCode:200, data:categories}) ;
@@ -35,6 +39,13 @@ const getCategory=async (req,res)=>{
 
   const createCategory=async(req,res)=>{
     try{
+
+      //custom validation
+    // const {username,name,address}=req.body
+    // if (!username){
+    // return res.status(400).json({message: Name field is required})
+    // } 
+
       // Data get through Body
       const categoryData=req.body; 
       // create object of data model

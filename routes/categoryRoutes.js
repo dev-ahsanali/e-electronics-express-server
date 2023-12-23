@@ -10,4 +10,4 @@ const {getCategories,getCategory,createCategory,deleteCategory}=require("../cont
   
   router.delete("/categories/:id",deleteCategory)
 
-    module.exports=router;
+  module.exports=router;

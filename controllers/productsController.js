@@ -1,5 +1,6 @@
 const mongoose=require("mongoose");
 const Products=require("../models/products");
+const{sendEmail}=require("../utils/emailUtils") 
 
 
 const getProducts=async (req,res)=>{
@@ -10,7 +11,7 @@ const getProducts=async (req,res)=>{
       // const products=await Products.find({_id: new mongoose.Types.ObjectId('64f846abc192b7f5d7d41955')});
   
       // Find/Fetch data from the Model
-    const products=await Products.find({});
+    const products=await Products.find({}).populate('categories').exec();
     res.status(200).json({statusCode:200,data:products});
   
     }catch(error){ 
@@ -40,6 +41,18 @@ const getProduct=async (req,res)=>{
   
   }
 
+   
+  let sendPromotionEmail=async (req,res)=>{
+    try{
+      const {to,subject,message}=req.body;
+      const respone= await sendEmail(to,subject,message);
+      res.status(200).json({response: respone});
+    }catch(error){ 
+      console.log(error);
+    }
+  }
 
-  
-  module.exports={getProduct,getProducts};
+
+
+
+  module.exports={getProduct,getProducts,sendPromotionEmail};

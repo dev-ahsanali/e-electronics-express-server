@@ -4,9 +4,14 @@ const mongoose = require("mongoose");
 const productsSchema=new mongoose.Schema({
     title:String,
     description:String,
-    category:String,
     quantity:Number,
-    isAvailable:Boolean
+    isAvailable:Boolean,
+    ratings:Object,
+    reviews:Array,
+    category:{ 
+      type:mongoose.Schema .Types.ObjectId,
+      ref:'categories' 
+    }
   })
   
   // Model
